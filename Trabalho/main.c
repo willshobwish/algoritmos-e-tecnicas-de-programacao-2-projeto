@@ -22,9 +22,9 @@ typedef struct Aluno {
 
 FILE *arquivo;
 
-void BuscaBinaria(Aluno Aluno, int indice, int baixo, int alto) {
-    int medio, indice;
-    if (baixo <= alto) {
+void OrdenacaoSelecao(int *vetor, ti) {
+}
+
 int BuscaBinaria(float *vetor, int dimensao, int ra, int inicio, int fim) {
     // Vetor: vetor, n: dimensao do vetor, ra: ra a ser localizado
     // inicio e fim: verificar o vetor entre os indices inicio e fim
