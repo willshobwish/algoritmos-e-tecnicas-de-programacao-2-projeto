@@ -22,6 +22,12 @@ typedef struct Aluno {
 
 FILE *arquivo;
 
+void BuscaBinaria(Aluno Aluno, int indice, int baixo, int alto) {
+    int medio, indice;
+    if (baixo <= alto) {
+    }
+}
+
 float CalcularMedia(Aluno Aluno) {
 }
 
