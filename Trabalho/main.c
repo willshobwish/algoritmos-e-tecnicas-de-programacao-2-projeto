@@ -45,6 +45,21 @@ int BuscaBinaria(float *vetor, int dimensao, int ra, int inicio, int fim) {
     }
     return posicao;
 }
+
+void pesquisa(int *x, int n) {
+    int dado, pos;
+    printf("Digite um valor para buscar no vetor: (0 para finalizar a busca) ");
+    scanf("%d", &dado);
+    while (dado != 0) {
+        pos = BuscaBinaria(x, n, dado, 0, n - 1);
+
+        if (pos != -1) {
+            printf("Valor %d encontrado na posicao %d\n", dado, pos);
+        } else {
+            printf("Valor %d nao encontrado\n", dado);
+        }
+        printf("Digite um valor para buscar no vetor: (0 para finalizar a busca) ");
+        scanf("%d", &dado);
     }
 }
 
