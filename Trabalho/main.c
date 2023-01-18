@@ -55,6 +55,7 @@ int main() {
         for (int j = 0; j < 2; j++) {
             printf("Nota trabalho: %.2f\n", a.materias[i].trabalho[j]);
         }
+        printf("Media de %s: %.2f\n", a.materias[i].nomeDisciplina, a.materias[i].media);
         printf("Aprovacao: %s\n", a.materias[i].aprovado);
         printf("\n");
     }
