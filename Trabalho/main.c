@@ -25,6 +25,26 @@ FILE *arquivo;
 void BuscaBinaria(Aluno Aluno, int indice, int baixo, int alto) {
     int medio, indice;
     if (baixo <= alto) {
+int BuscaBinaria(float *vetor, int dimensao, int ra, int inicio, int fim) {
+    // Vetor: vetor, n: dimensao do vetor, ra: ra a ser localizado
+    // inicio e fim: verificar o vetor entre os indices inicio e fim
+    int meio, posicao;
+    if (inicio <= fim) {
+        meio = (inicio + fim) / 2;  // divisao inteira, isto eh, a parte fracionaria nao eh considerada
+        if (ra == vetor[meio]) {
+            posicao = meio;
+        } else {
+            if (ra > vetor[meio]) {
+                posicao = BuscaBinaria(vetor, dimensao, ra, meio + 1, fim);
+            } else {
+                posicao = BuscaBinaria(vetor, dimensao, ra, inicio, meio - 1);
+            }
+        }
+    } else {
+        posicao = -1;
+    }
+    return posicao;
+}
     }
 }
 
