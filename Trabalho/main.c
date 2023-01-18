@@ -43,6 +43,7 @@ int main() {
                 fscanf(arquivo, "%f\n", &a.materias[i].trabalho[j]);
             }
             fscanf(arquivo, "%f\n", &a.materias[i].media);
+            fscanf(arquivo, "%s\n", a.materias[i].aprovado);
         }
     }
     printf("RA: %d\nNome: %s\n%d de %d de %d\n", a.ra, a.nome, a.dataDeNascimento.dia, a.dataDeNascimento.mes, a.dataDeNascimento.ano);
@@ -54,6 +55,7 @@ int main() {
         for (int j = 0; j < 2; j++) {
             printf("Nota trabalho: %.2f\n", a.materias[i].trabalho[j]);
         }
+        printf("Aprovacao: %s\n", a.materias[i].aprovado);
         printf("\n");
     }
 }
