@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAXIMOALUNO 2
+#define MAXIMOALUNO 50
 
 // Parte 1 Construcao do struct
 typedef struct Nascimento {
@@ -19,7 +19,7 @@ typedef struct Disciplinas {
 
 typedef struct Aluno {
     int registroAcademico;
-    char nome[51];
+    char nome[101];
     Nascimento dataDeNascimento;
     Disciplinas materias[5];
 } Aluno;
@@ -89,9 +89,9 @@ void CalcularMedia(Aluno *Aluno) {
 
 int main() {
     // Parte 2 Leitura e alocacao dos dados no struct
-    Aluno vetorAluno[5];
+    Aluno vetorAluno[MAXIMOALUNO];
     float vetorTrabalhos[5], vetorProvas[5], vetorMedia[5];
-    char arquivoOrigem[] = "teste.txt", arquivoDestino[] = "teste2.txt";
+    char arquivoOrigem[] = "arquivo_correto.txt", arquivoDestino[] = "teste2.txt";
     arquivo = fopen(arquivoOrigem, "r");
     while (!feof(arquivo)) {
         for (int alunoIndice = 0; alunoIndice < MAXIMOALUNO; alunoIndice++) {
@@ -126,7 +126,7 @@ int main() {
         fprintf(arquivo, "%d\n", vetorAluno[i].registroAcademico);
         for (int j = 0; j < 5; j++) {
             fprintf(arquivo, "%s\n", vetorAluno[i].materias[j].nomeDisciplina);
-            fprintf(arquivo, "%.2f\n", vetorAluno[i].materias[j].media);
+            fprintf(arquivo, "%f\n", vetorAluno[i].materias[j].media);
             fprintf(arquivo, "%s\n", vetorAluno[i].materias[j].aprovado);
         }
     }
