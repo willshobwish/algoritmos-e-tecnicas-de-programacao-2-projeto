@@ -53,3 +53,7 @@ Mkfile.old
 dkms.conf
 *.layout
 .vscode/settings.json
+*.depend
+*.layout
+*.layout
+Trabalho/Trabalho.layout

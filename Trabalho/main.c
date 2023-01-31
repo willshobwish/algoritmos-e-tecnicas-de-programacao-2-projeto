@@ -89,7 +89,7 @@ void CalcularMedia(Aluno *Aluno) {
 
 int main() {
     // Parte 2 Leitura e alocacao dos dados no struct
-    Aluno vetorAluno[MAXIMOALUNO];
+    Aluno vetorAluno[MAXIMOALUNO], vetorAlunoPesquisa[MAXIMOALUNO];
     float vetorTrabalhos[5], vetorProvas[5], vetorMedia[5];
     char arquivoOrigem[] = "arquivo_correto.txt", arquivoDestino[] = "teste2.txt";
     arquivo = fopen(arquivoOrigem, "r");
@@ -147,31 +147,32 @@ int main() {
             printf("\n");
         }
     }
+
     // Parte 4 leitura do arquivo com media e resultado
     arquivo = fopen(arquivoDestino, "r");
-    char nome[5 * MAXIMOALUNO][51], aprovado[5 * MAXIMOALUNO][20], disciplina[5 * MAXIMOALUNO][20];
-    int registroAcademico[MAXIMOALUNO];
-    float medias[5 * MAXIMOALUNO];
+    // char nome[5 * MAXIMOALUNO][51], aprovado[5 * MAXIMOALUNO][20], disciplina[5 * MAXIMOALUNO][20];
+    // int registroAcademico[MAXIMOALUNO];
+    // float medias[5 * MAXIMOALUNO];
 
     // fscanf(arquivo, "%d\n", registroAcademico[0]);
     // printf("Registro Academico: %d\n", registroAcademico[0]);
     for (int i = 0; i < MAXIMOALUNO; i++) {
-        fscanf(arquivo, "%d\n", &registroAcademico[i]);
-        for (int i = 0; i < 5; i++) {
-            fscanf(arquivo, "%s\n", disciplina[i]);
-            fscanf(arquivo, "%f\n", &medias[i]);
-            fscanf(arquivo, "%s\n", aprovado[i]);
+        fscanf(arquivo, "%d\n", &vetorAlunoPesquisa[i].registroAcademico);
+        for (int j = 0; j < 5; j++) {
+            fscanf(arquivo, "%s\n", vetorAlunoPesquisa[i].materias[j].nomeDisciplina);
+            fscanf(arquivo, "%f\n", &vetorAlunoPesquisa[i].materias[j].media);
+            fscanf(arquivo, "%s\n", vetorAlunoPesquisa[i].materias[j].aprovado);
         }
     }
     fclose(arquivo);
 
     printf("Parte 4\n");
     for (int i = 0; i < MAXIMOALUNO; i++) {
-        printf("Registro Academico: %d\n", registroAcademico[i]);
-        for (int i = 0; i < 5; i++) {
-            printf("Disciplina: %s\n", disciplina[i]);
-            printf("Media da disciplina: %f\n", medias[i]);
-            printf("Situacao: %s\n\n", aprovado[i]);
+        printf("Registro Academico: %d\n", vetorAlunoPesquisa[i].registroAcademico);
+        for (int j = 0; j < 5; j++) {
+            printf("Disciplina: %s\n", vetorAlunoPesquisa[i].materias[j].nomeDisciplina);
+            printf("Media da disciplina: %f\n", vetorAlunoPesquisa[i].materias[j].media);
+            printf("Situacao: %s\n\n", vetorAlunoPesquisa[i].materias[j].aprovado);
         }
     }
 }
