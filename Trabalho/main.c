@@ -30,11 +30,9 @@ FILE *arquivo;
 // }
 
 int BuscaBinaria(float *vetor, int dimensao, int registroAcademico, int inicio, int fim) {
-    // Vetor: vetor, n: dimensao do vetor, registroAcademico: registroAcademico vetorAluno[aluno] ser localizado
-    // inicio e fim: verificar o vetor entre os indices inicio e fim
     int meio, posicao;
     if (inicio <= fim) {
-        meio = (inicio + fim) / 2;  // divisao inteira, isto eh, vetorAluno[aluno] parte fracionaria nao eh considerada
+        meio = (inicio + fim) / 2;
         if (registroAcademico == vetor[meio]) {
             posicao = meio;
         } else {
@@ -50,22 +48,22 @@ int BuscaBinaria(float *vetor, int dimensao, int registroAcademico, int inicio, 
     return posicao;
 }
 
-void pesquisa(int *x, int n) {
-    int dado, pos;
-    printf("Digite um valor para buscar no vetor: (0 para finalizar vetorAluno[aluno] busca) ");
-    scanf("%d", &dado);
-    while (dado != 0) {
-        pos = BuscaBinaria(x, n, dado, 0, n - 1);
+// void pesquisa(int *x, int n) {
+//     int dado, pos;
+//     printf("Digite um valor para buscar no vetor: (0 para finalizar vetorAluno[aluno] busca) ");
+//     scanf("%d", &dado);
+//     while (dado != 0) {
+//         pos = BuscaBinaria(x, n, dado, 0, n - 1);
 
-        if (pos != -1) {
-            printf("Valor %d encontrado na posicao %d\n", dado, pos);
-        } else {
-            printf("Valor %d nao encontrado\n", dado);
-        }
-        printf("Digite um valor para buscar no vetor: (0 para finalizar vetorAluno[aluno] busca) ");
-        scanf("%d", &dado);
-    }
-}
+//         if (pos != -1) {
+//             printf("Valor %d encontrado na posicao %d\n", dado, pos);
+//         } else {
+//             printf("Valor %d nao encontrado\n", dado);
+//         }
+//         printf("Digite um valor para buscar no vetor: (0 para finalizar vetorAluno[aluno] busca) ");
+//         scanf("%d", &dado);
+//     }
+// }
 void CalcularAprovacao(Aluno *Aluno) {
     for (int i = 0; i < 5; i++) {
         if (Aluno->materias[i].media >= 5) {
@@ -91,7 +89,7 @@ int main() {
     // Parte 2 Leitura e alocacao dos dados no struct
     Aluno vetorAluno[MAXIMOALUNO], vetorAlunoPesquisa[MAXIMOALUNO];
     float vetorTrabalhos[5], vetorProvas[5], vetorMedia[5];
-    char arquivoOrigem[] = "arquivo_correto.txt", arquivoDestino[] = "teste2.txt";
+    char arquivoOrigem[] = "arquivo_correto.txt", arquivoDestino[] = "arquivo_destino.txt";
     arquivo = fopen(arquivoOrigem, "r");
     while (!feof(arquivo)) {
         for (int alunoIndice = 0; alunoIndice < MAXIMOALUNO; alunoIndice++) {
