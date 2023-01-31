@@ -83,6 +83,7 @@ Busca o registro academico utilizando uma busca binária, retorna a posição qu
 
 Retorna a posição quando a metade é igual ao elemnto procurado, caso ele procure por todo o vetor e não encontre, retornará $-1$.
 
+Vale lembrar que é necessário os elementos estar em ordem crescente.
 <!-- Realiza a busca por metades dos vetores -->
 ---
 
