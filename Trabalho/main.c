@@ -29,17 +29,17 @@ FILE *arquivo;
 // void OrdenacaoSelecao(int *vetor, ti) {
 // }
 
-int BuscaBinaria(float *vetor, int dimensao, int registroAcademico, int inicio, int fim) {
+int BuscaBinaria(Aluno *vetorAluno, int dimensao, int registroAcademico, int inicio, int fim) {
     int meio, posicao;
     if (inicio <= fim) {
         meio = (inicio + fim) / 2;
-        if (registroAcademico == vetor[meio]) {
+        if (registroAcademico == vetorAluno[meio].registroAcademico) {
             posicao = meio;
         } else {
-            if (registroAcademico > vetor[meio]) {
-                posicao = BuscaBinaria(vetor, dimensao, registroAcademico, meio + 1, fim);
+            if (registroAcademico > vetorAluno[meio].registroAcademico) {
+                posicao = BuscaBinaria(vetorAluno, dimensao, registroAcademico, meio + 1, fim);
             } else {
-                posicao = BuscaBinaria(vetor, dimensao, registroAcademico, inicio, meio - 1);
+                posicao = BuscaBinaria(vetorAluno, dimensao, registroAcademico, inicio, meio - 1);
             }
         }
     } else {
