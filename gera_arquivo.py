@@ -4,7 +4,7 @@ nomes = open('nomes_aleatorios.txt', 'r')
 arquivo = open("arquivo_correto.txt", "w")
 disciplinas = ["Portugues", "Matematica",
                "Biologia", "Geometria", "Programacao"]
-i = 0
+i = 1
 for nomes_arquivo in nomes.readlines():
     nome_correto = nomes_arquivo.replace(" ", "")
     arquivo.write(str(i)+'\n')
