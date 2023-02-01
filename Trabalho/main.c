@@ -166,7 +166,7 @@ int main() {
 
     printf("Parte 4\n");
     for (int i = 0; i < MAXIMOALUNO; i++) {
-        printf("Registro Academico: %d\n", vetorAlunoPesquisa[i].registroAcademico);
+        printf("Registro Academico: %d\n", vetorAlunoPesquisa[BuscaBinaria(vetorAlunoPesquisa, MAXIMOALUNO, i, 0, MAXIMOALUNO)].registroAcademico);
         for (int j = 0; j < 5; j++) {
             printf("Disciplina: %s\n", vetorAlunoPesquisa[i].materias[j].nomeDisciplina);
             printf("Media da disciplina: %f\n", vetorAlunoPesquisa[i].materias[j].media);
