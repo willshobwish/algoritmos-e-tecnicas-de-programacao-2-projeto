@@ -27,10 +27,12 @@ typedef struct Aluno {
 FILE *arquivo;
 
 int BuscaBinaria(Aluno *vetorAluno, int dimensaoVetor, int registroAcademico, int inicio, int fim) {
+    // Passagem de parametro por referencia
     int meio, posicao;
     if (inicio <= fim) {
         meio = (inicio + fim) / 2;
         if (registroAcademico == vetorAluno[meio].registroAcademico) {
+            // Como eh um vetor porem estamos especificando o indice, pode-se acessar desta maneira, sem a necessidade do uso da "seta"
             posicao = meio;
         } else {
             if (registroAcademico > vetorAluno[meio].registroAcademico) {
@@ -51,8 +53,8 @@ void Pesquisa(Aluno *vetorAluno, int dimensaoVetor) {
     scanf("%d", &registroAcademicoBusca);
     while (registroAcademicoBusca != 0) {
         posicao = BuscaBinaria(vetorAluno, dimensaoVetor, registroAcademicoBusca, 0, dimensaoVetor - 1);
-
         if (posicao != -1) {
+            // Caso a busca binaria retorne -1, isso quer dizer que nao existe o elemento procurado
             printf("Registro academico encontrado na posicao %d com o valor %d \n", posicao, registroAcademicoBusca);
             printf("Registro Academico: %d\n", vetorAluno[posicao].registroAcademico);
             for (int j = 0; j < 5; j++) {
