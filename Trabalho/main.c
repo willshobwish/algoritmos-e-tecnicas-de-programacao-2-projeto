@@ -26,10 +26,7 @@ typedef struct Aluno {
 
 FILE *arquivo;
 
-// void OrdenacaoSelecao(int *vetor, ti) {
-// }
-
-int BuscaBinaria(Aluno *vetorAluno, int dimensao, int registroAcademico, int inicio, int fim) {
+int BuscaBinaria(Aluno *vetorAluno, int dimensaoVetor, int registroAcademico, int inicio, int fim) {
     int meio, posicao;
     if (inicio <= fim) {
         meio = (inicio + fim) / 2;
@@ -37,9 +34,9 @@ int BuscaBinaria(Aluno *vetorAluno, int dimensao, int registroAcademico, int ini
             posicao = meio;
         } else {
             if (registroAcademico > vetorAluno[meio].registroAcademico) {
-                posicao = BuscaBinaria(vetorAluno, dimensao, registroAcademico, meio + 1, fim);
+                posicao = BuscaBinaria(vetorAluno, dimensaoVetor, registroAcademico, meio + 1, fim);
             } else {
-                posicao = BuscaBinaria(vetorAluno, dimensao, registroAcademico, inicio, meio - 1);
+                posicao = BuscaBinaria(vetorAluno, dimensaoVetor, registroAcademico, inicio, meio - 1);
             }
         }
     } else {
@@ -48,22 +45,29 @@ int BuscaBinaria(Aluno *vetorAluno, int dimensao, int registroAcademico, int ini
     return posicao;
 }
 
-// void pesquisa(int *x, int n) {
-//     int dado, pos;
-//     printf("Digite um valor para buscar no vetor: (0 para finalizar vetorAluno[aluno] busca) ");
-//     scanf("%d", &dado);
-//     while (dado != 0) {
-//         pos = BuscaBinaria(x, n, dado, 0, n - 1);
+void Pesquisa(Aluno *vetorAluno, int dimensaoVetor) {
+    int registroAcademicoBusca, posicao;
+    printf("Insira um numero de registro academico para buscar: ");
+    scanf("%d", &registroAcademicoBusca);
+    while (registroAcademicoBusca != 0) {
+        posicao = BuscaBinaria(vetorAluno, dimensaoVetor, registroAcademicoBusca, 0, dimensaoVetor - 1);
 
-//         if (pos != -1) {
-//             printf("Valor %d encontrado na posicao %d\n", dado, pos);
-//         } else {
-//             printf("Valor %d nao encontrado\n", dado);
-//         }
-//         printf("Digite um valor para buscar no vetor: (0 para finalizar vetorAluno[aluno] busca) ");
-//         scanf("%d", &dado);
-//     }
-// }
+        if (posicao != -1) {
+            printf("Registro academico encontrado na posicao %d com o valor %d \n", posicao, registroAcademicoBusca);
+            printf("Registro Academico: %d\n", vetorAluno[posicao].registroAcademico);
+            for (int j = 0; j < 5; j++) {
+                printf("Disciplina: %s\n", vetorAluno[posicao].materias[j].nomeDisciplina);
+                printf("Media da disciplina: %f\n", vetorAluno[posicao].materias[j].media);
+                printf("Situacao: %s\n\n", vetorAluno[posicao].materias[j].aprovado);
+            }
+        } else {
+            printf("Valor %d nao encontrado\n", registroAcademicoBusca);
+        }
+        printf("Insira um numero de registro academico para buscar (ou 0 para encerrar): ");
+        scanf("%d", &registroAcademicoBusca);
+    }
+}
+
 void CalcularAprovacao(Aluno *Aluno) {
     for (int i = 0; i < 5; i++) {
         if (Aluno->materias[i].media >= 5) {
@@ -107,11 +111,11 @@ int main() {
                     fscanf(arquivo, "%f\n", &vetorAluno[alunoIndice].materias[i].trabalho[j]);
                 }
                 fscanf(arquivo, "%f\n", &vetorAluno[alunoIndice].materias[i].media);
-                // fscanf(arquivo, "%s\n", vetorAluno[aluno].materias[i].aprovado);
             }
         }
     }
     fclose(arquivo);
+
     // Parte 3.1 calculo da media e resultado
     for (int i = 0; i < MAXIMOALUNO; i++) {
         CalcularMedia(&vetorAluno[i]);
@@ -148,12 +152,6 @@ int main() {
 
     // Parte 4 leitura do arquivo com media e resultado
     arquivo = fopen(arquivoDestino, "r");
-    // char nome[5 * MAXIMOALUNO][51], aprovado[5 * MAXIMOALUNO][20], disciplina[5 * MAXIMOALUNO][20];
-    // int registroAcademico[MAXIMOALUNO];
-    // float medias[5 * MAXIMOALUNO];
-
-    // fscanf(arquivo, "%d\n", registroAcademico[0]);
-    // printf("Registro Academico: %d\n", registroAcademico[0]);
     for (int i = 0; i < MAXIMOALUNO; i++) {
         fscanf(arquivo, "%d\n", &vetorAlunoPesquisa[i].registroAcademico);
         for (int j = 0; j < 5; j++) {
@@ -164,13 +162,6 @@ int main() {
     }
     fclose(arquivo);
 
-    printf("Parte 4\n");
-    for (int i = 0; i < MAXIMOALUNO; i++) {
-        printf("Registro Academico: %d\n", vetorAlunoPesquisa[BuscaBinaria(vetorAlunoPesquisa, MAXIMOALUNO, i, 0, MAXIMOALUNO)].registroAcademico);
-        for (int j = 0; j < 5; j++) {
-            printf("Disciplina: %s\n", vetorAlunoPesquisa[i].materias[j].nomeDisciplina);
-            printf("Media da disciplina: %f\n", vetorAlunoPesquisa[i].materias[j].media);
-            printf("Situacao: %s\n\n", vetorAlunoPesquisa[i].materias[j].aprovado);
-        }
-    }
+    Pesquisa(&vetorAlunoPesquisa, MAXIMOALUNO);
+    return 0;
 }
