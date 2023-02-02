@@ -52,11 +52,14 @@ void Pesquisa(Aluno *vetorAluno, int dimensaoVetor) {
     printf("Insira um numero de registro academico para buscar: ");
     scanf("%d", &registroAcademicoBusca);
     while (registroAcademicoBusca != 0) {
+        // A busca binaria retorna o valor da posicao que se encontra o elemento desejado
         posicao = BuscaBinaria(vetorAluno, dimensaoVetor, registroAcademicoBusca, 0, dimensaoVetor - 1);
         if (posicao != -1) {
             // Caso a busca binaria retorne -1, isso quer dizer que nao existe o elemento procurado
             printf("Registro academico encontrado na posicao %d com o valor %d \n", posicao, registroAcademicoBusca);
+            // Busca os dados pelo indice do vetor de alunos
             printf("Registro Academico: %d\n", vetorAluno[posicao].registroAcademico);
+            // Laco de repeticao para mostrar os dados, como notas de provas e trabalhos
             for (int j = 0; j < 5; j++) {
                 printf("Disciplina: %s\n", vetorAluno[posicao].materias[j].nomeDisciplina);
                 printf("Media da disciplina: %f\n", vetorAluno[posicao].materias[j].media);
@@ -66,11 +69,13 @@ void Pesquisa(Aluno *vetorAluno, int dimensaoVetor) {
             printf("Valor %d nao encontrado\n", registroAcademicoBusca);
         }
         printf("Insira um numero de registro academico para buscar (ou 0 para encerrar): ");
+        // Repete novamente o processo caso a entrada nao seja 0
         scanf("%d", &registroAcademicoBusca);
     }
 }
 
 void CalcularAprovacao(Aluno *Aluno) {
+    // Funcao que pega por referencia um vetor de aluno e verifica se o aluno esta aprovado ou nao
     for (int i = 0; i < 5; i++) {
         if (Aluno->materias[i].media >= 5) {
             strcpy(Aluno->materias[i].aprovado, "Aprovado");
@@ -81,6 +86,7 @@ void CalcularAprovacao(Aluno *Aluno) {
 }
 
 void CalcularMedia(Aluno *Aluno) {
+    // Funcao que pega por referencia um vetor de aluno e calcula a media
     for (int i = 0; i < 5; i++) {
         float mediaProva = 0, mediaTrabalho = 0;
         for (int j = 0; j < 2; j++) {
@@ -94,12 +100,15 @@ void CalcularMedia(Aluno *Aluno) {
 int main() {
     // Parte 2 Leitura e alocacao dos dados no struct
     Aluno vetorAluno[MAXIMOALUNO], vetorAlunoPesquisa[MAXIMOALUNO];
-    float vetorTrabalhos[5], vetorProvas[5], vetorMedia[5];
+    // Definicao dos nomes dos arquivos em variaveis para facilitar a abertura
     char arquivoOrigem[] = "arquivo_correto.txt", arquivoDestino[] = "arquivo_destino.txt";
     arquivo = fopen(arquivoOrigem, "r");
     while (!feof(arquivo)) {
+        // Executa o laco de repeticao enquanto nao for o fim do arquivo
         for (int alunoIndice = 0; alunoIndice < MAXIMOALUNO; alunoIndice++) {
+            // Executa o laco de repeticao enquanto nao atingir a quantidade especificado de alunos
             fscanf(arquivo, "%d\n", &vetorAluno[alunoIndice].registroAcademico);
+            // Leitura dos dados do arquivo
             fscanf(arquivo, "%s\n", vetorAluno[alunoIndice].nome);
             fscanf(arquivo, "%d\n", &vetorAluno[alunoIndice].dataDeNascimento.dia);
             fscanf(arquivo, "%d\n", &vetorAluno[alunoIndice].dataDeNascimento.mes);
@@ -120,13 +129,16 @@ int main() {
 
     // Parte 3.1 calculo da media e resultado
     for (int i = 0; i < MAXIMOALUNO; i++) {
+        // Utilizacao das funcoes criadas acima
         CalcularMedia(&vetorAluno[i]);
         CalcularAprovacao(&vetorAluno[i]);
     }
 
     // Parte 3.2 escrita do resultado e media
+    // Abertura do arquivo
     arquivo = fopen(arquivoDestino, "w");
     for (int i = 0; i < MAXIMOALUNO; i++) {
+        // Realizacao da escrita dos dados em um outro arquivo
         fprintf(arquivo, "%d\n", vetorAluno[i].registroAcademico);
         for (int j = 0; j < 5; j++) {
             fprintf(arquivo, "%s\n", vetorAluno[i].materias[j].nomeDisciplina);
@@ -139,6 +151,7 @@ int main() {
     for (int alunoIndice = 0; alunoIndice < MAXIMOALUNO; alunoIndice++) {
         printf("Registro Academico: %05d\nNome: %s\n%d de %d de %d\n", vetorAluno[alunoIndice].registroAcademico, vetorAluno[alunoIndice].nome, vetorAluno[alunoIndice].dataDeNascimento.dia, vetorAluno[alunoIndice].dataDeNascimento.mes, vetorAluno[alunoIndice].dataDeNascimento.ano);
         for (int i = 0; i < 5; i++) {
+            // Impressao dos dados no terminal
             printf("Nome disciplina: %s\n", vetorAluno[alunoIndice].materias[i].nomeDisciplina);
             for (int j = 0; j < 2; j++) {
                 printf("Nota prova: %f\n", vetorAluno[alunoIndice].materias[i].prova[j]);
@@ -152,7 +165,7 @@ int main() {
         }
     }
 
-    // Parte 4 leitura do arquivo com media e resultado
+    // Parte 4 leitura do arquivo com media e resultado e armazenamento em um outro vetor
     arquivo = fopen(arquivoDestino, "r");
     for (int i = 0; i < MAXIMOALUNO; i++) {
         fscanf(arquivo, "%d\n", &vetorAlunoPesquisa[i].registroAcademico);
